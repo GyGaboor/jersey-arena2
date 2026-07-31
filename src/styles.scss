@@ -1,0 +1,108 @@
+:root {
+  --ink: #1a1a1a;
+  --sub: #6b6b64;
+  --muted: #9a9a92;
+  --line: #e6e4dd;
+  --tile: #f4f2ec;
+  --hu-red: #ce2939;
+  --hu-white: #ffffff;
+  --hu-green: #477050;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shop { max-width: 1240px; margin: 0 auto; }
+
+/* ---------- header ---------- */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px; border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.flag { display: inline-flex; flex-direction: column; width: 16px; height: 18px; border: 0.5px solid var(--line); }
+.flag span { flex: 1; }
+.flag span:nth-child(1) { background: var(--hu-red); }
+.flag span:nth-child(2) { background: var(--hu-white); }
+.flag span:nth-child(3) { background: var(--hu-green); }
+.wordmark { font-size: 17px; letter-spacing: 4px; font-weight: 400; }
+.icons { display: flex; gap: 22px; color: var(--sub); }
+.icons i { font-size: 18px; cursor: pointer; }
+
+/* ---------- toolbar ---------- */
+.toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px; border-bottom: 1px solid var(--line);
+}
+.count { font-size: 11px; letter-spacing: 1.5px; color: var(--muted); }
+.tools { display: flex; align-items: center; gap: 18px; }
+.sort { font-size: 11px; letter-spacing: 1.5px; color: var(--sub); }
+.viewtoggle {
+  display: flex; align-items: center; gap: 2px;
+  border: 1px solid var(--line); border-radius: 20px; padding: 3px;
+}
+
+/* ---------- body layout ---------- */
+.body { display: grid; grid-template-columns: 210px minmax(0, 1fr); }
+.rail { padding: 22px 20px; border-right: 1px solid var(--line); }
+.rail section { margin-bottom: 26px; }
+.rail h3 { margin: 0 0 14px; font-size: 11px; letter-spacing: 2px; font-weight: 400; color: var(--sub); }
+
+.year-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 6px; }
+
+.frow {
+  display: block; width: 100%; text-align: left; padding: 5px 0;
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; font-size: 12.5px; letter-spacing: 0.4px; color: var(--muted);
+}
+.frow.on { color: var(--ink); }
+
+/* ---------- products ---------- */
+.main { padding: 22px 24px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 26px 16px; }
+.tile .thumb {
+  background: var(--tile); height: 240px;
+  display: flex; align-items: center; justify-content: center;
+}
+.tile .thumb.tall { height: 320px; }
+.tile.car { padding: 0 8px; }
+.meta { padding-top: 12px; }
+.eyebrow { font-size: 11px; letter-spacing: 1px; color: var(--muted); }
+.name { font-size: 13px; letter-spacing: 0.5px; margin: 4px 0 5px; }
+.price { font-size: 12px; letter-spacing: 0.5px; color: var(--sub); }
+
+/* ---------- PrimeNG overrides ---------- */
+.p-button.year-tile {
+  width: 100%; justify-content: center; border-radius: 4px;
+  padding: 6px 0; font-size: 11px; letter-spacing: 0.5px; font-weight: 400;
+}
+.p-button.year-tile:not(.p-button-outlined) { background: var(--ink); border-color: var(--ink); color: #fff; }
+.p-button.year-tile.p-button-outlined { background: #fff; border-color: var(--line); color: var(--sub); }
+.p-button.year-tile.p-button-outlined:hover { background: var(--tile); border-color: var(--line); color: var(--ink); }
+
+.viewtoggle .p-button {
+  width: 34px; height: 28px; border-radius: 16px; padding: 0; border: none;
+}
+.viewtoggle .p-button:not(.p-button-text) { background: var(--ink); color: #fff; }
+.viewtoggle .p-button.p-button-text { color: var(--sub); background: transparent; }
+
+/* carousel: quiet the default chrome */
+.p-carousel .p-carousel-indicators { display: none; }
+.p-carousel-prev-button, .p-carousel-next-button {
+  color: var(--ink); background: #fff; border: 1px solid var(--line);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 760px) {
+  .body { grid-template-columns: 1fr; }
+  .rail { border-right: none; border-bottom: 1px solid var(--line); }
+  .year-grid { grid-template-columns: repeat(5, 1fr); }
+}

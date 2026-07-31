@@ -1,0 +1,101 @@
+<div class="shop">
+
+  <!-- header -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="flag" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      <span class="wordmark">RETROKITS</span>
+    </div>
+    <nav class="icons" aria-label="Fiók">
+      <i class="pi pi-search" aria-hidden="true"></i>
+      <i class="pi pi-heart" aria-hidden="true"></i>
+      <i class="pi pi-shopping-bag" aria-hidden="true"></i>
+    </nav>
+  </header>
+
+  <!-- toolbar -->
+  <div class="toolbar">
+    <span class="count">1975 — 1984 · 47 TÉTEL</span>
+    <div class="tools">
+      <span class="sort">RENDEZÉS</span>
+      <div class="viewtoggle" role="group" aria-label="Nézet">
+        <p-button icon="pi pi-th-large" [text]="viewMode !== 'grid'" severity="contrast"
+                  size="small" (onClick)="viewMode = 'grid'" ariaLabel="Rács nézet" />
+        <p-button icon="pi pi-images" [text]="viewMode !== 'carousel'" severity="contrast"
+                  size="small" (onClick)="viewMode = 'carousel'" ariaLabel="Körhinta nézet" />
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- filter rail -->
+    <aside class="rail">
+      <section>
+        <h3>ÉV</h3>
+        <div class="year-grid">
+          @for (y of years; track y) {
+            <p-button [label]="y.toString()" size="small" severity="contrast"
+                      [outlined]="!isYear(y)" styleClass="year-tile"
+                      (onClick)="toggleYear(y)" />
+          }
+        </div>
+      </section>
+
+      <section>
+        <h3>KLUB</h3>
+        @for (c of clubs; track c.name) {
+          <button type="button" class="frow" [class.on]="c.on" (click)="toggle(c)">{{ c.name }}</button>
+        }
+      </section>
+
+      <section>
+        <h3>KIEGÉSZÍTŐK</h3>
+        @for (a of accessories; track a.name) {
+          <button type="button" class="frow" [class.on]="a.on" (click)="toggle(a)">{{ a.name }}</button>
+        }
+      </section>
+
+      <section>
+        <h3>ÁLLAPOT</h3>
+        @for (s of conditions; track s.name) {
+          <button type="button" class="frow" [class.on]="s.on" (click)="toggle(s)">{{ s.name }}</button>
+        }
+      </section>
+    </aside>
+
+    <!-- products -->
+    <main class="main">
+      @if (viewMode === 'grid') {
+        <div class="grid">
+          @for (p of products; track p.club) {
+            <article class="tile">
+              <div class="thumb"><app-jersey-art [product]="p" /></div>
+              <div class="meta">
+                <div class="eyebrow">{{ p.year }} · {{ p.label }}</div>
+                <div class="name">{{ p.club }}</div>
+                <div class="price">{{ p.price }}</div>
+              </div>
+            </article>
+          }
+        </div>
+      } @else {
+        <p-carousel [value]="products" [numVisible]="2" [numScroll]="1"
+                    [showIndicators]="false" [responsiveOptions]="responsive">
+          <ng-template let-p pTemplate="item">
+            <article class="tile car">
+              <div class="thumb tall"><app-jersey-art [product]="p" /></div>
+              <div class="meta">
+                <div class="eyebrow">{{ p.year }} · {{ p.label }}</div>
+                <div class="name">{{ p.club }}</div>
+                <div class="price">{{ p.price }}</div>
+              </div>
+            </article>
+          </ng-template>
+        </p-carousel>
+      }
+    </main>
+  </div>
+</div>
